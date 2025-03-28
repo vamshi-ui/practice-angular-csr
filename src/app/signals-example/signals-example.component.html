@@ -1,0 +1,13 @@
+<p style="color: green">counter app</p>
+
+<button (click)="increment()">+</button>
+<button (click)="decrement()">-</button>
+
+<span
+  >counter value is
+  <span [class]="`${counter() > 0 ? 'color-green' : 'color-red'}`">
+    {{ counter() }}</span
+  >
+</span>
+
+<p>number is {{ customSignal() }}</p>
