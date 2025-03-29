@@ -1,4 +1,6 @@
 <p>rxjs-example works!</p>
 
+<input type="search" (input)="onSearch($event)" appCapitalize />
 
-<input type="search" appCapitalize>
+{{ sampleObs$ | async }}
+{{ searchData$ | async }}
