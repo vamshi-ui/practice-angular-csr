@@ -1,3 +1,43 @@
 <h1 appColorChange>vamshi</h1>
 
+<h1>{{ "vamshi is good boy , is it true" | wordCounter : "words" }}</h1>
+<h1>{{ "vamshi is good boy" | wordCounter : "char" }}</h1>
+
+<p>{{ 20000 | currency : "INR" }}</p>
+<p>{{ today | date : "MMM dd YYYY hh:mm:ss a" }}</p>
+
 <app-signals-example />
+<app-rxjs-example />
+
+<h1>apply border example</h1>
+
+<span data-status="success" appApplyBorder>success</span>
+<span data-status="error" appApplyBorder>error</span>
+
+<h1>
+  authentication status - @if(isAuthenticated()){
+  <span>welcome vamshi</span>
+  } @else {
+  <span>please login</span>
+  }
+</h1>
+
+user list
+
+<ul>
+  @for( user of userList;track $index){
+  <li>{{ user }}</li>
+  } @empty{
+  <li>no records</li>
+
+  }
+</ul>
+
+
+<app-child [displayData]="data" (onSubmit)="childData($event)"/>
+
+{{data}}
+
+<a routerLink="/lazy">lazy</a>
+
+<router-outlet></router-outlet>
