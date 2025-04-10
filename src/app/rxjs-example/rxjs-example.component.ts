@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { CapitalizeDirective } from '../drectives/capitalize.directive';
-import { BehaviorSubject, debounceTime, from, interval, of, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  from,
+  interval,
+  of,
+  switchMap,
+} from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,7 +22,7 @@ export class RxjsExampleComponent {
   timer$ = interval(2000);
   count = 0;
   searchData$ = new BehaviorSubject('');
-  apiData$ = of([1,2,3])
+  apiData$ = of([1, 2, 3]);
 
   constructor() {
     this.timer$.subscribe(() => {
@@ -22,12 +30,17 @@ export class RxjsExampleComponent {
       this.sampleObs$ = of(this.count);
     });
 
-    this.searchData$.pipe(debounceTime(500)).pipe(switchMap((searchText:any)=>{
-      console.log(searchText)
-      return this.apiData$
-    })).subscribe({
-      next: console.log,
-    });
+    this.searchData$
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(
+        switchMap((searchText: any) => {
+          console.log(searchText);
+          return this.apiData$;
+        })
+      )
+      .subscribe({
+        next: console.log,
+      });
   }
 
   onSearch(event: any) {

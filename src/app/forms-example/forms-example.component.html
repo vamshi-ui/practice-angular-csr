@@ -1,0 +1,16 @@
+<div [formGroup]="form">
+  <input formControlName="email" type="text" placeholder="email" />
+  @if(email?.touched && email?.errors){
+  <small style="color: red">please enter valid email</small>
+  }
+  <input
+    formControlName="password"
+    [type]="passwordtype()"
+    placeholder="password"
+  />
+  @if(password?.touched && password?.errors){
+    <small style="color: red">{{password?.errors | json}}</small>
+    }
+  <button (click)="togglePassword()">show/hide password</button>
+  <input type="submit" [disabled]="form.invalid" />
+</div>
